@@ -8,6 +8,7 @@
         "build": "tsc -p tsconfig.build.json",
         "format": "prettier --write \"./{src,test}/**/*.{ts,js}\"",
         "format:check": "prettier --list-different \"./{src,test}/**/*.{ts,js}\"",
+        "postinstall": "yarn format",
         "start:hmr": "node dist/main",
         "start:dev": "ts-node -r tsconfig-paths/register src/main.ts",
         "migration:generate": "ts-node node_modules/typeorm/cli.js migration:generate -f ormconfig -d src/migrations -n",
@@ -97,9 +98,9 @@
         "gh-pages": "^2.2.0",
         "husky": "^4.2.5",
         "jest": "^26.0.0",
-        "lint-staged": "~10.2.2",
         "nodemon": "^2.0.3",
         "prettier": "^2.0.5",
+        "pretty-quick": "^2.0.1",
         "supertest": "^4.0.2",
         "ts-jest": "^25.4.0",
         "ts-loader": "^7.0.2",
@@ -131,13 +132,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged"
+            "pre-commit": "pretty-quick --staged"
         }
-    },
-    "lint-staged": {
-        "*.ts": [
-            "eslint --fix",
-            "git add"
-        ]
     }
 }
